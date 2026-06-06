@@ -1,0 +1,68 @@
+# ── Virtual Environment ────────────────────────────
+venv/
+env/
+.env
+.venv
+
+
+# ── Python Cache ───────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.pyc
+
+
+# ── Jupyter Notebooks Checkpoints ─────────────────
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# ── Data Files (usually too large for GitHub) ──────
+data/raw/
+data/processed/
+*.csv
+*.xlsx
+*.json
+*.parquet
+
+# ── Trained Models (large files) ──────────────────
+models/
+*.pkl
+*.joblib
+*.h5
+*.pt
+*.pth
+
+# ── Database ───────────────────────────────────────
+*.db
+*.sqlite
+*.sqlite3
+database/ml_pipeline.db
+
+# ── MLflow ─────────────────────────────────────────
+mlruns/
+mlartifacts/
+
+# ── Environment Variables (sensitive info) ─────────
+.env
+.env.local
+*.env
+
+# ── VS Code Settings ───────────────────────────────
+.vscode/
+*.code-workspace
+
+# ── OS Files ───────────────────────────────────────
+.DS_Store           # Mac
+Thumbs.db           # Windows
+desktop.ini
+
+# ── Logs ───────────────────────────────────────────
+*.log
+logs/
+
+# ── Distribution / Build ───────────────────────────
+dist/
+build/
+*.egg-info/

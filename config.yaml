@@ -1,0 +1,20 @@
+data:
+  raw_path: data\raw\nykaa_campaign_data_with_nulls.csv
+  raw_path: data\raw\purplle_campaign_data_with_nulls.csv
+  raw_path: data\raw\tira_campaign_data_with_nulls.csv
+  processed_path: data\processed\clean_df.csv
+
+
+model:  
+  n_estimators: 100
+  test_size: 0.2
+  random_state: 42
+
+target:
+  regression: Revenue
+  classification: Profit_Flag
+
+database:
+  path: database/ml_pipeline.db
+  
+  
