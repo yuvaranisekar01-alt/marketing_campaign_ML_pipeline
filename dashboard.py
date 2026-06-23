@@ -59,7 +59,7 @@ if page == "🏠 Home":
     with col2:
         st.metric("Classification Accuracy", "90%", "XGBoost")
     with col3:
-        st.metric("Regression R²", "0.70", "XGBoost")
+        st.metric("Regression R²", "0.75", "RandomForest")
     with col4:
         st.metric("Total Features", "6", "After selection")
 
@@ -147,7 +147,7 @@ elif page == "🔮 Prediction":
 
             X_clf = pd.concat([num_scaled_clf, ohe_cols, mlb_cols], axis=1)
 
-            reg_cols = reg_model.get_booster().feature_names
+            reg_cols = reg_model.feature_names_in_
 
             for col in reg_cols:
                 if col not in X_reg.columns:
@@ -326,10 +326,10 @@ elif page == "🤖 Model Performance":
 
     with col1:
         st.subheader("Regression — Revenue Prediction")
-        st.metric("Test R²",  "0.70")
-        st.metric("MAE",      "₹1,68,540")
-        st.metric("RMSE",     "₹2,58,839")
-        st.metric("Model",    "XGBoost Regressor")
+        st.metric("Test R²",  "0.75")
+        st.metric("MAE",      "₹1,68,533")
+        st.metric("RMSE",     "₹2,58,894")
+        st.metric("Model",    "RandomForest Regressor")
 
         # load and show plot if exists
         if os.path.exists('models/regression_actual_vs_pred.png'):
@@ -353,3 +353,6 @@ elif page == "🤖 Model Performance":
         st.subheader("ROC Curve")
         st.image('models/classification_roc_curve.png',
                  caption='ROC Curve — Profit/Loss Classification')
+        
+
+        

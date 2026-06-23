@@ -6,7 +6,7 @@ import os
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import RobustScaler,  MultiLabelBinarizer, OneHotEncoder
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score, accuracy_score
-from xgboost import XGBRegressor
+from sklearn.ensemble import RandomForestRegressor
 
 import joblib
 
@@ -115,25 +115,26 @@ def build_final(X_train_num_scaled, X_test_num_scaled,
     print(f"✅ Final test shape : {X_test_final.shape}")
     return X_train_final, X_test_final
 
-# 7. train XG boost regressor
+# 7. train Random Forest regressor
 
 def train_model(X_train_final, Y_train):
 
-    xgb_reg = XGBRegressor(n_estimators= 200, learning_rate= 0.03, max_depth = 5,
-                     min_child_weight=5, subsample=0.8, colsample_bytree=0.8, random_state=42, n_jobs=1)
+    model = RandomForestRegressor(n_estimators=200, max_depth=10, min_samples_split=10, 
+                              min_samples_leaf=4, random_state=42, n_jobs=1, )
 
-    xgb = xgb_reg.fit(X_train_final, Y_train)
+    
+    model.fit(X_train_final, Y_train)
 
-    joblib.dump(xgb, 'models/best_model_reg.pkl')
+    joblib.dump(rf_reg, 'models/best_model_reg.pkl')
     print("✅ Regression model saved!")
-    return xgb
+    return rf_reg
 
  # 8. evaluate 
 
-def evaluate_model(xgb_reg, X_train_final, X_test_final, Y_train, Y_test):
+def evaluate_model(rf_reg, X_train_final, X_test_final, Y_train, Y_test):
 
-    y_train_pred = xgb_reg.predict(X_train_final)
-    y_test_pred  = xgb_reg.predict(X_test_final)
+    y_train_pred = rf_reg.predict(X_train_final)
+    y_test_pred  = rf_reg.predict(X_test_final)
     
 
     print("\n── Regression Results ───────────────────────────────")
@@ -160,6 +161,7 @@ if __name__ == "__main__":
                                             x_train_ohe,    x_test_ohe,
                                             x_train_channel, x_test_channel
                                        )
-    xgb_reg = train_model(X_train_final, Y_train)
+    rf_reg = train_model(X_train_final, Y_train)
     
-    evaluate_model(xgb_reg, X_train_final, X_test_final, Y_train, Y_test)
+    evaluate_model(rf_reg, X_train_final, X_test_final, Y_train, Y_test)
+
